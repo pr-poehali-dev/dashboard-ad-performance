@@ -11,25 +11,25 @@ const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const metrics = [
-    { title: 'Общий доход', value: '₽2,847,392', change: '+12.5%', trend: 'up' },
-    { title: 'Новые пользователи', value: '14,256', change: '+8.2%', trend: 'up' },
-    { title: 'Конверсия', value: '3.47%', change: '-2.1%', trend: 'down' },
-    { title: 'Средний чек', value: '₽1,847', change: '+5.4%', trend: 'up' },
+    { title: 'Расходы на рекламу', value: '₽847,392', change: '+12.5%', trend: 'up' },
+    { title: 'Клики', value: '24,856', change: '+18.2%', trend: 'up' },
+    { title: 'Заявки', value: '1,247', change: '+5.8%', trend: 'up' },
+    { title: 'Продажи', value: '₽3,450,000', change: '+15.4%', trend: 'up' },
   ];
 
   const chartData = [
-    { month: 'Янв', revenue: 240000, users: 1200, conversion: 3.2 },
-    { month: 'Фев', revenue: 280000, users: 1400, conversion: 3.5 },
-    { month: 'Мар', revenue: 320000, users: 1600, conversion: 3.8 },
-    { month: 'Апр', revenue: 290000, users: 1450, conversion: 3.3 },
-    { month: 'Май', revenue: 350000, users: 1750, conversion: 4.1 },
-    { month: 'Июн', revenue: 380000, users: 1900, conversion: 4.2 },
+    { month: 'Янв', spend: 140000, clicks: 4200, leads: 210, sales: 84 },
+    { month: 'Фев', spend: 165000, clicks: 4950, leads: 247, sales: 98 },
+    { month: 'Мар', spend: 180000, clicks: 5400, leads: 270, sales: 108 },
+    { month: 'Апр', spend: 175000, clicks: 5250, leads: 262, sales: 104 },
+    { month: 'Май', spend: 190000, clicks: 5700, leads: 285, sales: 114 },
+    { month: 'Июн', spend: 205000, clicks: 6150, leads: 307, sales: 123 },
   ];
 
-  const topProducts = [
-    { name: 'Премиум подписка', sales: '₽847,392', growth: '+18.2%' },
-    { name: 'Стандарт план', sales: '₽524,883', growth: '+12.1%' },
-    { name: 'Базовый пакет', sales: '₽298,472', growth: '+8.7%' },
+  const adSources = [
+    { name: 'Google Ads', spend: '₽347,392', cpl: '₽680', roas: '4.2x' },
+    { name: 'Яндекс.Директ', spend: '₽284,883', cpl: '₽720', roas: '3.8x' },
+    { name: 'Facebook Ads', spend: '₽198,472', cpl: '₽590', roas: '4.5x' },
   ];
 
   return (
@@ -39,7 +39,7 @@ const Index = () => {
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <h1 className="text-2xl font-semibold text-foreground">Аналитика</h1>
+              <h1 className="text-2xl font-semibold text-foreground">Рекламная аналитика</h1>
               <Badge variant="secondary" className="bg-primary/10 text-primary">
                 Live
               </Badge>
@@ -61,10 +61,10 @@ const Index = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Все категории</SelectItem>
-                  <SelectItem value="subscriptions">Подписки</SelectItem>
-                  <SelectItem value="products">Товары</SelectItem>
-                  <SelectItem value="services">Услуги</SelectItem>
+                  <SelectItem value="all">Все источники</SelectItem>
+                  <SelectItem value="google">Google Ads</SelectItem>
+                  <SelectItem value="yandex">Яндекс.Директ</SelectItem>
+                  <SelectItem value="facebook">Facebook Ads</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -113,9 +113,9 @@ const Index = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Icon name="BarChart3" size={20} />
-                    <span>Динамика дохода</span>
+                    <span>Расходы на рекламу</span>
                   </CardTitle>
-                  <CardDescription>Помесячная статистика за полугодие</CardDescription>
+                  <CardDescription>Рекламный бюджет по месяцам</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -126,12 +126,12 @@ const Index = () => {
                           <div className="w-full bg-secondary rounded-full h-3">
                             <div 
                               className="bg-primary h-3 rounded-full transition-all duration-500"
-                              style={{ width: `${(data.revenue / 400000) * 100}%` }}
+                              style={{ width: `${(data.spend / 250000) * 100}%` }}
                             />
                           </div>
                         </div>
                         <span className="text-sm font-medium text-foreground w-20 text-right">
-                          ₽{(data.revenue / 1000).toFixed(0)}к
+                          ₽{(data.spend / 1000).toFixed(0)}к
                         </span>
                       </div>
                     ))}
@@ -144,9 +144,9 @@ const Index = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Icon name="Users" size={20} />
-                    <span>Рост пользователей</span>
+                    <span>Клики по источникам</span>
                   </CardTitle>
-                  <CardDescription>Новые регистрации по месяцам</CardDescription>
+                  <CardDescription>Количество кликов по рекламным каналам</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -157,12 +157,12 @@ const Index = () => {
                           <div className="w-full bg-secondary rounded-full h-3">
                             <div 
                               className="bg-blue-500 h-3 rounded-full transition-all duration-500"
-                              style={{ width: `${(data.users / 2000) * 100}%` }}
+                              style={{ width: `${(data.clicks / 7000) * 100}%` }}
                             />
                           </div>
                         </div>
                         <span className="text-sm font-medium text-foreground w-16 text-right">
-                          {data.users}
+                          {data.clicks}
                         </span>
                       </div>
                     ))}
@@ -171,33 +171,130 @@ const Index = () => {
               </Card>
             </div>
 
-            {/* Top Products */}
+            {/* Ad Sources Performance */}
             <Card className="border border-border">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Icon name="Award" size={20} />
-                  <span>Топ продукты</span>
+                  <span>Рекламные источники</span>
                 </CardTitle>
-                <CardDescription>Лидеры продаж за выбранный период</CardDescription>
+                <CardDescription>Эффективность каналов привлечения</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {topProducts.map((product, index) => (
+                  {adSources.map((source, index) => (
                     <div key={index} className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold text-sm">
                           {index + 1}
                         </div>
-                        <span className="font-medium text-foreground">{product.name}</span>
+                        <div>
+                          <span className="font-medium text-foreground block">{source.name}</span>
+                          <span className="text-sm text-muted-foreground">CPL: {source.cpl}</span>
+                        </div>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <span className="font-semibold text-foreground">{product.sales}</span>
+                        <span className="font-semibold text-foreground">{source.spend}</span>
                         <Badge variant="secondary" className="bg-green-100 text-green-700">
-                          {product.growth}
+                          ROAS {source.roas}
                         </Badge>
                       </div>
                     </div>
                   ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Detailed Campaign Table */}
+            <Card className="border border-border">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <Icon name="Target" size={20} />
+                  <span>Детализация по кампаниям</span>
+                </CardTitle>
+                <CardDescription>Подробная статистика эффективности</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-border">
+                        <th className="text-left p-3 text-sm font-medium text-muted-foreground">Кампания</th>
+                        <th className="text-right p-3 text-sm font-medium text-muted-foreground">Расходы</th>
+                        <th className="text-right p-3 text-sm font-medium text-muted-foreground">Клики</th>
+                        <th className="text-right p-3 text-sm font-medium text-muted-foreground">Заявки</th>
+                        <th className="text-right p-3 text-sm font-medium text-muted-foreground">CPL</th>
+                        <th className="text-right p-3 text-sm font-medium text-muted-foreground">Продажи</th>
+                        <th className="text-right p-3 text-sm font-medium text-muted-foreground">ROAS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-border/50">
+                        <td className="p-3">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <span className="font-medium">Поиск - Основные услуги</span>
+                          </div>
+                        </td>
+                        <td className="text-right p-3 font-medium">₽185,400</td>
+                        <td className="text-right p-3">2,847</td>
+                        <td className="text-right p-3">142</td>
+                        <td className="text-right p-3">₽1,306</td>
+                        <td className="text-right p-3 text-green-600">₽847,200</td>
+                        <td className="text-right p-3">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700">4.6x</Badge>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-border/50">
+                        <td className="p-3">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span className="font-medium">РСЯ - Широкая аудитория</span>
+                          </div>
+                        </td>
+                        <td className="text-right p-3 font-medium">₽98,750</td>
+                        <td className="text-right p-3">3,420</td>
+                        <td className="text-right p-3">89</td>
+                        <td className="text-right p-3">₽1,109</td>
+                        <td className="text-right p-3 text-green-600">₽356,000</td>
+                        <td className="text-right p-3">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700">3.6x</Badge>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-border/50">
+                        <td className="p-3">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                            <span className="font-medium">Facebook - Ретаргетинг</span>
+                          </div>
+                        </td>
+                        <td className="text-right p-3 font-medium">₽67,200</td>
+                        <td className="text-right p-3">1,890</td>
+                        <td className="text-right p-3">94</td>
+                        <td className="text-right p-3">₽715</td>
+                        <td className="text-right p-3 text-green-600">₽423,000</td>
+                        <td className="text-right p-3">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700">6.3x</Badge>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="p-3">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                            <span className="font-medium">Google - Медийная сеть</span>
+                          </div>
+                        </td>
+                        <td className="text-right p-3 font-medium">₽124,300</td>
+                        <td className="text-right p-3">4,150</td>
+                        <td className="text-right p-3">76</td>
+                        <td className="text-right p-3">₽1,635</td>
+                        <td className="text-right p-3 text-green-600">₽304,000</td>
+                        <td className="text-right p-3">
+                          <Badge variant="secondary" className="bg-yellow-100 text-yellow-700">2.4x</Badge>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </CardContent>
             </Card>
@@ -233,22 +330,22 @@ const Index = () => {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between p-4 bg-secondary/30 rounded-lg">
                       <div>
-                        <h4 className="font-medium">Финансовый отчет</h4>
-                        <p className="text-sm text-muted-foreground">Доходы, расходы, прибыль</p>
+                        <h4 className="font-medium">Отчет по рекламным расходам</h4>
+                        <p className="text-sm text-muted-foreground">Бюджет, клики, конверсии</p>
                       </div>
                       <Button size="sm">Создать</Button>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-secondary/30 rounded-lg">
                       <div>
-                        <h4 className="font-medium">Отчет по пользователям</h4>
-                        <p className="text-sm text-muted-foreground">Активность, регистрации, сегменты</p>
+                        <h4 className="font-medium">Отчет по заявкам</h4>
+                        <p className="text-sm text-muted-foreground">Лиды, качество, источники</p>
                       </div>
                       <Button size="sm">Создать</Button>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-secondary/30 rounded-lg">
                       <div>
-                        <h4 className="font-medium">Продуктовая аналитика</h4>
-                        <p className="text-sm text-muted-foreground">Продажи по категориям и товарам</p>
+                        <h4 className="font-medium">Отчет по продажам</h4>
+                        <p className="text-sm text-muted-foreground">ROI, конверсии, прибыль</p>
                       </div>
                       <Button size="sm">Создать</Button>
                     </div>
