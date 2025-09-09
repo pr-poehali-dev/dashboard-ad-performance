@@ -107,7 +107,7 @@ const Index = () => {
             </div>
 
             {/* Charts Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Revenue Chart */}
               <Card className="border border-border">
                 <CardHeader>
@@ -166,6 +166,101 @@ const Index = () => {
                         </span>
                       </div>
                     ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Pie Chart - Ad Sources Distribution */}
+              <Card className="border border-border">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Icon name="PieChart" size={20} />
+                    <span>Распределение бюджета</span>
+                  </CardTitle>
+                  <CardDescription>Доля каждого источника</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="relative w-40 h-40">
+                      <svg width="160" height="160" viewBox="0 0 42 42" className="w-40 h-40">
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.915"
+                          fill="transparent"
+                          stroke="#3b82f6"
+                          strokeWidth="3"
+                          strokeDasharray="35 65"
+                          strokeDashoffset="25"
+                        />
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.915"
+                          fill="transparent"
+                          stroke="#10b981"
+                          strokeWidth="3"
+                          strokeDasharray="28 72"
+                          strokeDashoffset="-10"
+                        />
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.915"
+                          fill="transparent"
+                          stroke="#8b5cf6"
+                          strokeWidth="3"
+                          strokeDasharray="20 80"
+                          strokeDashoffset="-38"
+                        />
+                        <circle
+                          cx="21"
+                          cy="21"
+                          r="15.915"
+                          fill="transparent"
+                          stroke="#f59e0b"
+                          strokeWidth="3"
+                          strokeDasharray="17 83"
+                          strokeDashoffset="-58"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-xl font-semibold">₽476к</div>
+                          <div className="text-xs text-muted-foreground">Всего</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                        <span className="text-sm">Google Ads</span>
+                      </div>
+                      <span className="text-sm font-medium">35%</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <span className="text-sm">Яндекс.Директ</span>
+                      </div>
+                      <span className="text-sm font-medium">28%</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                        <span className="text-sm">Facebook Ads</span>
+                      </div>
+                      <span className="text-sm font-medium">20%</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
+                        <span className="text-sm">Другие</span>
+                      </div>
+                      <span className="text-sm font-medium">17%</span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
